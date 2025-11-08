@@ -1,5 +1,6 @@
 # RR_Sosteri_SG5_liikenne
-
-Eka tesitcommitti
-
-<h1>Niin tuntuu tekevän</h1>
+<h2>Sosterin jäsenet</h2>
+Sami Tuikka = Paramedio  
+Jouni Laurio = Hevosmies
+Johanna Ojala = Joojala20
+Johanna Rämö = Nanna8
