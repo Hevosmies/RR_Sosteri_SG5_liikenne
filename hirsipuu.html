@@ -1,37 +1,54 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Liikennemerkit hallussako?</title>
-<meta name="description" content="Testaa liikennemerkkitietosi neljän pelin avulla – hauskaa ja hyödyllistä oppimista aikuisille kuljettajille." />
-<link rel="stylesheet" href="./style/style.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" /> <!-- Roboto-fontti. Testinä vielä toistaiseksi -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liikennemerkit hallussako?</title>
+  <meta name="description" content="Testaa liikennemerkkitietosi neljän pelin avulla – hauskaa ja hyödyllistä oppimista aikuisille kuljettajille." />
+  <link rel="stylesheet" href="./style/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
 </head>
 
 <body>
   <header>
-    <div class="header-bar">
-      </div>
-      <nav aria-label="Päävalikko">
-        <ul>
-          <li><a href="index.html">Etusivu</a></li>
-          <li><a href="hirsipuu.html">Hirsipuu</a></li>
-          <li><a href="kuvavalinta.html">Kuvavalinta</a></li>
-          <li><a href="liikennemerkit.html">Liikennemerkit</a></li>
-          <li><a href="tietovisa.html">Tietovisa</a></li>
-          <li><a href="koostesivu.html">Koostesivu</a></li>
-          <li><a href="infosivu.html">Infosivu</a></li>
-        </ul>
-      </nav>
-    </div>
-
+    <div class="header-bar"></div>
+    <nav aria-label="Päävalikko">
+      <ul>
+        <li><a href="index.html">Etusivu</a></li>
+        <li><a href="hirsipuu.html">Hirsipuu</a></li>
+        <li><a href="kuvavalinta.html">Kuvavalinta</a></li>
+        <li><a href="liikennemerkit.html">Liikennemerkit</a></li>
+        <li><a href="tietovisa.html">Tietovisa</a></li>
+        <li><a href="koostesivu.html">Koostesivu</a></li>
+        <li><a href="infosivu.html">Infosivu</a></li>
+      </ul>
+    </nav>
     <h1>Liikennemerkit hallussako?</h1>
   </header>
 
   <main>
-    
+    <section class="game-container">
+      <h2> Hirsipuupeli: Arvaa liikennesana</h2>
+
+      <img id="hangmanImage" src="images/hangman0.png" alt="Hirsipuu" />
+
+      <p id="wordDisplay">_ _ _ _ _</p>
+      <p>Arvatut kirjaimet: <span id="guessedLetters"></span></p>
+      <p>Yrityksiä jäljellä: <span id="attemptsLeft">6</span></p>
+      <p>Pisteet: <span id="scoreDisplay">10</span></p>
+
+      <input type="text" id="letterInput" maxlength="1" autofocus />
+      <button onclick="guessLetter()">Arvaa kirjain</button>
+
+      <button onclick="showHint()">Näytä vihje (-2 pistettä)</button>
+      <p id="hint" style="visibility: hidden;"></p>
+
+      <p id="message"></p>
+      <button onclick="startGame()">Uusi peli</button>
+    </section>
+
+    <script src="./scripts/hirsipuu.js"></script>
   </main>
 
   <footer>
