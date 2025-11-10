@@ -4,15 +4,26 @@
   <meta charset="UTF-8">
   <title>Car CAPTCHA</title>
   <link rel="stylesheet" href="./style/notrobot.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+
+<h2>Valitse kaikki kuvat joissa esiintyy auto</h2>
+<div class="grid" id="captchaGrid"></div>
 <button onclick="verifySelection()">Verify</button>
 <p id="result"></p>
 
 <script>
   const images = [
-    { src: 'https://cdn.pixabay.com/photo/2016/11/18/17/06/auto-1835435_1280.png', isCar: true },
-    { src: 'https://cdn.pixabay.com/photo/2013/07/12/13/57/house-147314_1280.png', isCar: false },
-    { src: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62?crop=entropy&fm=jpg&h=100&w=100', isCar: true },
-    // Add more images here
+    { src: 'images/notrobot/car1.jpg', isCar: true },
+    { src: 'images/notrobot/isitornot.jpg', isCar: false },
+    { src: 'images/notrobot/car2.jpg', isCar: true },
+    { src: 'images/notrobot/isitornot1.jpg', isCar: false },
+    { src: 'images/notrobot/car3.jpg', isCar: true },
+    { src: 'images/notrobot/maybecar1.jpg', isCar: true },
+    { src: 'images/notrobot/maybecar2.jpg', isCar: false },
+    { src: 'images/notrobot/maybecar3.jpg', isCar: false },
+    { src: 'images/notrobot/maybecar4.jpg', isCar: false}
   ];
 
   const grid = document.getElementById('captchaGrid');
@@ -44,4 +55,3 @@
 </script>
 
 </body>
-</html>
