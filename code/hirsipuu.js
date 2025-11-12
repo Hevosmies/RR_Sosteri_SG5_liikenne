@@ -111,8 +111,10 @@ function paivitaHirsipuuKuva() {
 function tarkistaPelitilanne() {
   if (!naytettavaSana.includes("_")) {
     document.getElementById("viesti").textContent = `🎉 Voitit! Sana oli "${valittuSana}". Pisteet: ${pisteet}`;
+    tallennaPisteet(pisteet);
   } else if (yrityksiaJaljella === 0) {
     document.getElementById("viesti").textContent = `😢 Hävisit! Sana oli "${valittuSana}". Pisteet: 0`;
+    tallennaPisteet(0);
   }
 }
 
@@ -127,6 +129,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
+//pisteiden tallennus
+function tallennaPisteet(pisteet) {
+  const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
+  scores.hirsipuu = pisteet;
+  localStorage.setItem("gameScores", JSON.stringify(scores));
+}
 // Itse pelin käynnistys kun se ladattu
 window.onload = aloitaPeli;
