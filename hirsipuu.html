@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liikennemerkit hallussako?</title>
   <meta name="description" content="Testaa liikennemerkkitietosi neljän pelin avulla – hauskaa ja hyödyllistä oppimista aikuisille kuljettajille." />
-  <link rel="stylesheet" href="./style/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="./style/hirsipuu.css" />
+  <link rel="stylesheet" href="style/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
 </head>
 
@@ -29,26 +30,29 @@
 
   <main>
     <section class="game-container">
-      <h2> Hirsipuupeli: Arvaa liikennesana</h2>
+      <h2>Hirsipuupeli: Arvaa liikennesana</h2>
 
-      <img id="hangmanImage" src="images/hangman0.png" alt="Hirsipuu" />
+      <img id="hangmanImage" src="./images/hirsipuu/hangman0.png" alt="Hirsipuu" />
 
+      <!-- Näyttää mikä tilanne pelissä -->
       <p id="wordDisplay">_ _ _ _ _</p>
-      <p>Arvatut kirjaimet: <span id="guessedLetters"></span></p>
-      <p>Yrityksiä jäljellä: <span id="attemptsLeft">6</span></p>
-      <p>Pisteet: <span id="scoreDisplay">10</span></p>
+      <p>Arvatut kirjaimet: <span id="arvatutKirjaimet"></span></p>
+      <p>Yrityksiä jäljellä: <span id="yrityksiaJaljella">6</span></p>
+      <p>Pisteet: <span id="pisteet">10</span></p>
 
-      <input type="text" id="letterInput" maxlength="1" autofocus />
-      <button onclick="guessLetter()">Arvaa kirjain</button>
+      <!-- Painikkeet ja kirjainten syöttö -->
+      <input type="text" id="syotakirjain" maxlength="1" autofocus />
+      <button onclick="arvaaKirjain()">Arvaa kirjain</button>
+      <button onclick="naytaVihje()">Näytä vihje (-2 pistettä)</button>
 
-      <button onclick="showHint()">Näytä vihje (-2 pistettä)</button>
-      <p id="hint" style="visibility: hidden;"></p>
+      <p id="vihje" style="visibility: hidden;"></p>
+      <p id="viesti"></p>
 
-      <p id="message"></p>
-      <button onclick="startGame()">Uusi peli</button>
+      <button onclick="aloitaPeli()">Uusi peli</button>
     </section>
 
-    <script src="./scripts/hirsipuu.js"></script>
+    <!-- Jiiässän lataus -->
+    <script src="./code/hirsipuu.js"></script>
   </main>
 
   <footer>
