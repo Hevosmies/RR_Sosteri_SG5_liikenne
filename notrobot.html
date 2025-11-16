@@ -27,14 +27,16 @@
     <h1>Liikennemerkit hallussako?</h1>
   </header>
 
-  <!-- Kuvien ruudukko -->
-  <div class="grid" id="captchaGrid"></div>
+  
+  <div class="grid" id="Kuvaruutu"></div>
 
   <!-- Napit -->
   <button onclick="verifySelection()">Tarkista</button>
-  <button id="retryBtn" onclick="resetTest()" style="display:none;">Yritä uudelleen</button>
+  
+  <div style="text-align:center;">
+  <button id="uusiksi" onclick="resetTest()" style="display:none;">Yritä uudelleen</button></div>
 
-  <!-- Tulosviestit -->
+  <!-- Tulokset -->
   <p id="result"></p>
   <p id="previousResult" style="font-style:italic; text-align:center;"></p>
 
@@ -51,7 +53,7 @@
       { src: 'images/notrobot/maybecar4.jpg', isCar: false }
     ];
 
-    const grid = document.getElementById('captchaGrid');
+    const grid = document.getElementById('Kuvaruutu');
     let attemptCount = 0;
     let testCompleted = false;
 
@@ -90,8 +92,8 @@
 
       if (attemptCount >= 3) {
         document.getElementById('result').textContent =
-          '⚠️ Yritysten enimmäismäärä (3) saavutettu.';
-        document.getElementById('retryBtn').style.display = 'inline-block';
+          'Yritysten enimmäismäärä (3) saavutettu.';
+        document.getElementById('uusiksi').style.display = 'inline-block';
         return;
       }
 
@@ -118,11 +120,11 @@
       if (isCorrect) {
         testCompleted = true;
         document.getElementById('result').textContent =
-          `🎉 Onnistuit! Yritys nro ${attemptCount}, pisteet: ${score}`;
-        document.getElementById('retryBtn').style.display = 'inline-block';
+          `Loistavaa!!! Yritys nro ${attemptCount}, pisteet: ${score}`;
+        document.getElementById('uusiksi').style.display = 'inline-block';
       } else {
         document.getElementById('result').textContent =
-          `❌ Väärin. Yritys nro ${attemptCount}, pisteet: ${score}`;
+          `Väärin. Yritys nro ${attemptCount}, pisteet: ${score}`;
         renderGrid(); // Sekoitetaan kuvat uudelleen
       }
     }
@@ -132,7 +134,7 @@
       attemptCount = 0;
       testCompleted = false;
       document.getElementById('result').textContent = '';
-      document.getElementById('retryBtn').style.display = 'none';
+      document.getElementById('uusiksi').style.display = 'none';
       renderGrid();
     }
 
@@ -143,7 +145,7 @@
 
       if (previousAttempts && previousScore) {
         document.getElementById('previousResult').textContent =
-          `🔁 Edellinen testi: ${previousAttempts} yritystä, pisteet: ${previousScore}`;
+          `Edellinen testi: ${previousAttempts} yritystä, pisteet: ${previousScore}`;
       }
     }
 

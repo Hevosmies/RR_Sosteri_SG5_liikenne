@@ -103,7 +103,7 @@ button:hover {
   background-color: #0056b3;
 }
 
-#retryBtn {
+#uusiksi {
   display: block;
   margin: 1rem auto;
   padding: 0.5rem 1rem;
@@ -116,7 +116,7 @@ button:hover {
   cursor: pointer;
 }
 
-#retryBtn:hover {
+#uusiksi:hover {
   background-color: #0056b3;
 }
 
@@ -124,4 +124,21 @@ button:hover {
   text-align: center;
   font-size: 1.2rem;
   margin-top: 1rem;
+}
+
+
+
+
+/* Peinentää ruutua */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 100px);
+  }
+}
+
+/* Vielä kapeampi*/
+@media (max-width: 400px) {
+  .grid {
+    grid-template-columns: repeat(1, 100px);
+  }
 }
