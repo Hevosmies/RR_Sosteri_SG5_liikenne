@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liikennemerkit hallussako?</title>
+  <meta name="description" content="Testaa liikennemerkkitietosi neljän pelin avulla – hauskaa ja hyödyllistä oppimista aikuisille kuljettajille." />
+  <link rel="stylesheet" href="./style/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <div class="header-bar"></div>
+    <nav aria-label="Päävalikko">
+      <ul>
+        <li><a href="index.html">Etusivu</a></li>
+        <li><a href="hirsipuu.html">Hirsipuu</a></li>
+        <li><a href="kuvavalinta.html">Kuvavalinta</a></li>
+        <li><a href="liikennemerkit.html">Liikennemerkit</a></li>
+        <li><a href="tietovisa.html">Tietovisa</a></li>
+        <li><a href="koostesivu.html">Koostesivu</a></li>
+        <li><a href="infosivu.html">Infosivu</a></li>
+      </ul>
+    </nav>
+    <h1>Liikennemerkit hallussako?</h1>
+  </header>
+  <main>
+    <link rel="stylesheet" href="./style/liikennemerkit.css" />
+    <section class="game-container">
+      <h2> Liikennemerkkipeli</h2>
+      <h2>Yhdistä liikennemerkki ja selite vetämällä selite liikennemerkin päälle</h2>
+      <h3>Oikeasta vastauksesta saat 2 pistettä, väärästä vastauksesta 0 pistettä</h3>
+
+      <div class="selite-container" id="selitteet">
+        <div class="selite" draggable="true" data-id="3">Vaarallisten aineiden kuljettaminen kielletty</div>
+        <div class="selite" draggable="true" data-id="5">Keskusta</div>
+        <div class="selite" draggable="true" data-id="1">Etuajo-oikeuden päättyminen</div>
+        <div class="selite" draggable="true" data-id="4">Taajama</div>
+        <div class="selite" draggable="true" data-id="2">Tienristeys</div>
+    </div>
+    
+        <div class="merkki-container" id="merkit">
+        <div class="merkki" etuajo-oikeuden päättyminen="1"><img src="..///peli/images/merkki_3.jpg" alt="Merkki 1"></div>
+        <div class="merkki" Tienristeys="2"><img src="..///peli/images/merkki_5.jpg" alt="Merkki 2"></div>
+        <div class="merkki" Vaarallisen aineen kuljettaminen kielletty="3"><img src="..///peli/images/merkki_1.jpg" alt="Merkki 3"></div>
+        <div class="merkki" Taajama="4"><img src="..///peli/images/merkki_4.jpg" alt="Merkki 4"></div>
+        <div class="merkki" Keskusta="5"><img src="..///peli/images/merkki_2.jpg" alt="Merkki 5"></div>
+
+        <button onclick="Tarkista()">Tarkista</button>
+        <div id="Tulokset"></div>
+            
+          <script>
+            const selitteet = document.querySelectorAll('.selite');
+            const merkit = document.querySelectorAll('.merkki');
+
+            selitteet.forEach(selite => {
+              selite.addEventListener('dragstart', e => {
+                e.dataTransfer.setData('text/plain', selite.dataset.id);
+                });
+                });
+
+            merkit.forEach(merkki => {
+              merkki.addEventListener('dragover', e => {
+                e.preventDefault(); 
+                merkki.classList.add('droppable');
+                });
+
+              merkki.addEventListener('dragleave' , () => {
+                merkki.classList.remove('droppable');
+                });
+
+              merkki.addEventListener('drop', e => {
+                e.preventDefault();
+                merkki.classList.remove('droppable');
+                    
+                const seliteId = e.dataTransfer.getData('text/plain');
+                const selite = document.querySelector(`.selite[data-id='${seliteId}']`);
+                  if (!merkki.querySelector('.selite')) {
+                      merkki.appendChild(selite.cloneNode(true));
+                      merkki.dataset.vastaus = seliteId;
+                      selite.draggable = false;
+                      selite.style.opacity = 0.5;
+                    }
+                });
+                });   
+
+        function Tarkista() {
+            let pisteet = 0;
+            merkit.forEach(merkki => {
+                if (merkki.dataset.vastaus === merkki.dataset.oikea) {
+                    pisteet += 2;
+                }
+         });
+        document.getElementById('Tulokset').textContent = `Sait ${pisteet} pistettä!`;
+        }
+
+      </script>
+</body>
+</html>
