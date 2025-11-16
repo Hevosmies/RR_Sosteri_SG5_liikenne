@@ -1,0 +1,60 @@
+body { 
+    font-family: sans-serif; padding: 20px; 
+} 
+
+.selite-container { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+    margin-bottom: 20px; 
+    } 
+
+.selite { 
+    background-color: #2faaf2; 
+    border: 1px solid#d9f56c; 
+    padding: 5px; 
+    width: 150px; 
+    text-align: center; 
+    cursor: grab; 
+    font-size: 14px; 
+} 
+
+.merkki-container { 
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap; 
+    gap: 15px; 
+    margin-bottom: 20px; 
+}
+
+.merkki { 
+    border: 2px dashed #ccc; 
+    padding: 8px; 
+    width: 160px;  
+    height: 160px; 
+    text-align: center; 
+    background-color: rgba(255,255,255,0.8); 
+    border-radius: 8px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} 
+
+.merkki img { 
+    max-width: 100%; 
+    max-height: 90px; 
+}
+
+
+.droppable { 
+    border: 2px solid #007bff; 
+    background-color: #e9f5ff; 
+}
+    
+#Tulokset {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #0e27e9;
+}
