@@ -1,128 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
-  <meta charset="UTF-8">
-  <title>Etsi autot</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liikennemerkit hallussako?</title>
+  <meta name="description" content="Testaa liikennemerkkitietosi neljän pelin avulla – hauskaa ja hyödyllistä oppimista aikuisille kuljettajille." />
+  <link rel="stylesheet" href="./style/notrobot.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+</head>
 
-  <!-- Ulkoinen tyylitiedosto -->
-  <link rel="stylesheet" href="style/notrobot.css">
+<body>
+  <header>
+    <div class="header-bar"></div>
+    <nav aria-label="Päävalikko">
+      <ul>
+        <li><a href="index.html">Etusivu</a></li>
+        <li><a href="hirsipuu.html">Hirsipuu</a></li>
+        <li><a href="notrobot.html">Kuvavalinta</a></li>
+        <li><a href="liikennemerkit.html">Liikennemerkit</a></li>
+        <li><a href="tietovisa.html">Tietovisa</a></li>
+        <li><a href="koostesivu.html">Koostesivu</a></li>
+        <li><a href="infosivu.html">Infosivu</a></li>
+      </ul>
+    </nav>
+    <h1>Liikennemerkit hallussako?</h1>
+  </header>
 
-  <!-- Nopeampi yhteys Google Fonts -palveluun -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <h2>Valitse kaikki kuvat joissa esiintyy auto</h2>
-
-  <!-- Kuvaruudukko -->
+  <!-- Kuvien ruudukko -->
   <div class="grid" id="captchaGrid"></div>
 
-  <!-- Tarkistusnappi -->
+  <!-- Napit -->
   <button onclick="verifySelection()">Tarkista</button>
+  <button id="retryBtn" onclick="resetTest()" style="display:none;">Yritä uudelleen</button>
 
-  <!-- Alusta-nappi (uudelleenjärjestää kuvat) -->
-  <!--<button onclick="reloadCaptcha()">Alusta</button>-->
-
-  <!-- Tulosviesti -->
+  <!-- Tulosviestit -->
   <p id="result"></p>
-
-  <!-- JavaScript alkaa -->
-  
+  <p id="previousResult" style="font-style:italic; text-align:center;"></p>
 
   <script>
-  const images = [
-    { src: 'images/notrobot/car1.jpg', isCar: true },
-    { src: 'images/notrobot/isitornot.jpg', isCar: false },
-    { src: 'images/notrobot/car2.jpg', isCar: true },
-    { src: 'images/notrobot/isitornot1.jpg', isCar: false },
-    { src: 'images/notrobot/car3.jpg', isCar: true },
-    { src: 'images/notrobot/maybecar1.jpg', isCar: true },
-    { src: 'images/notrobot/maybecar2.jpg', isCar: false },
-    { src: 'images/notrobot/maybecar3.jpg', isCar: false },
-    { src: 'images/notrobot/maybecar4.jpg', isCar: false }
-  ];
+    const images = [
+      { src: 'images/notrobot/car1.jpg', isCar: true },
+      { src: 'images/notrobot/isitornot.jpg', isCar: false },
+      { src: 'images/notrobot/car2.jpg', isCar: true },
+      { src: 'images/notrobot/isitornot1.jpg', isCar: false },
+      { src: 'images/notrobot/car3.jpg', isCar: true },
+      { src: 'images/notrobot/maybecar1.jpg', isCar: true },
+      { src: 'images/notrobot/maybecar2.jpg', isCar: false },
+      { src: 'images/notrobot/maybecar3.jpg', isCar: false },
+      { src: 'images/notrobot/maybecar4.jpg', isCar: false }
+    ];
 
-  const grid = document.getElementById('captchaGrid');
-  let attemptCount = 0;
-  let testCompleted = false; // Estää lisäyritykset onnistumisen jälkeen
+    const grid = document.getElementById('captchaGrid');
+    let attemptCount = 0;
+    let testCompleted = false;
 
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
-  function renderGrid() {
-    grid.innerHTML = '';
-    shuffle(images);
-
-    images.forEach((img, index) => {
-      const imageElement = document.createElement('img');
-      imageElement.src = img.src;
-      imageElement.dataset.index = index;
-      imageElement.classList.remove('selected');
-      imageElement.onclick = () => {
-        if (!testCompleted) {
-          imageElement.classList.toggle('selected');
-        }
-      };
-      grid.appendChild(imageElement);
-    });
-
-    document.getElementById('result').textContent = '';
-  }
-
-  function verifySelection() {
-    if (testCompleted) return;
-
-    if (attemptCount >= 3) {
-      document.getElementById('result').textContent =
-        '⚠️ Yritysten enimmäismäärä (3) saavutettu. Lataa sivu uudelleen aloittaaksesi uudestaan.';
-      return;
+    // Sekoittaa kuvat satunnaiseen järjestykseen
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
     }
 
-    attemptCount++;
+    // Piirtää ruudukon
+    function renderGrid() {
+      grid.innerHTML = '';
+      shuffle(images);
 
-    const selected = document.querySelectorAll('.grid img.selected');
-    const selectedIndexes = Array.from(selected).map(img => parseInt(img.dataset.index));
-    const correctIndexes = images
-      .map((img, i) => img.isCar ? i : null)
-      .filter(i => i !== null);
+      images.forEach((img, index) => {
+        const imageElement = document.createElement('img');
+        imageElement.src = img.src;
+        imageElement.dataset.index = index;
+        imageElement.classList.remove('selected');
+        imageElement.onclick = () => {
+          if (!testCompleted) {
+            imageElement.classList.toggle('selected');
+          }
+        };
+        grid.appendChild(imageElement);
+      });
 
-    const isCorrect = selectedIndexes.length === correctIndexes.length &&
-                      selectedIndexes.every(i => correctIndexes.includes(i));
-
-    let score = 0;
-    if (attemptCount === 1) score = 3;
-    else if (attemptCount === 2) score = 2;
-    else if (attemptCount === 3) score = 1;
-
-    localStorage.setItem('captchaAttempts', attemptCount);
-    localStorage.setItem('captchaScore', score);
-
-    if (isCorrect) {
-      testCompleted = true;
-      document.getElementById('result').textContent =
-        `🎉 Onnistuit! Yritys nro ${attemptCount}, pisteet: ${score}`;
-    } else {
-      document.getElementById('result').textContent =
-        `❌ Väärin. Yritys nro ${attemptCount}, pisteet: ${score}`;
-      renderGrid(); // Sekoitetaan kuvat uudelleen
+      document.getElementById('result').textContent = '';
     }
-  }
 
-  function showPreviousResults() {
-    const previousAttempts = localStorage.getItem('captchaAttempts');
-    const previousScore = localStorage.getItem('captchaScore');
+    // Tarkistaa valinnan
+    function verifySelection() {
+      if (testCompleted) return;
 
-    if (previousAttempts && previousScore) {
-      const resultText = `🔁 Edellinen yritys: ${previousAttempts}, pisteet: ${previousScore}`;
-      const resultElement = document.createElement('p');
-      resultElement.textContent = resultText;
-      resultElement.style.fontStyle = 'italic';
-      resultElement.style.textAlign = 'center';
-      document.body.insertBefore(resultElement, document.getElementById('captchaGrid'));
+      if (attemptCount >= 3) {
+        document.getElementById('result').textContent =
+          '⚠️ Yritysten enimmäismäärä (3) saavutettu.';
+        document.getElementById('retryBtn').style.display = 'inline-block';
+        return;
+      }
+
+      attemptCount++;
+
+      const selected = document.querySelectorAll('.grid img.selected');
+      const selectedIndexes = Array.from(selected).map(img => parseInt(img.dataset.index));
+      const correctIndexes = images
+        .map((img, i) => img.isCar ? i : null)
+        .filter(i => i !== null);
+
+      const isCorrect = selectedIndexes.length === correctIndexes.length &&
+                        selectedIndexes.every(i => correctIndexes.includes(i));
+
+      let score = 0;
+      if (attemptCount === 1) score = 3;
+      else if (attemptCount === 2) score = 2;
+      else if (attemptCount === 3) score = 1;
+
+      // Tallennetaan Local Storageen
+      localStorage.setItem('captchaAttempts', attemptCount);
+      localStorage.setItem('captchaScore', score);
+
+      if (isCorrect) {
+        testCompleted = true;
+        document.getElementById('result').textContent =
+          `🎉 Onnistuit! Yritys nro ${attemptCount}, pisteet: ${score}`;
+        document.getElementById('retryBtn').style.display = 'inline-block';
+      } else {
+        document.getElementById('result').textContent =
+          `❌ Väärin. Yritys nro ${attemptCount}, pisteet: ${score}`;
+        renderGrid(); // Sekoitetaan kuvat uudelleen
+      }
     }
-  }
 
-  showPreviousResults();
-  renderGrid();
-</script>
+    // Nollaa testin
+    function resetTest() {
+      attemptCount = 0;
+      testCompleted = false;
+      document.getElementById('result').textContent = '';
+      document.getElementById('retryBtn').style.display = 'none';
+      renderGrid();
+    }
+
+    // Näyttää edellisen tuloksen
+    function showPreviousResults() {
+      const previousAttempts = localStorage.getItem('captchaAttempts');
+      const previousScore = localStorage.getItem('captchaScore');
+
+      if (previousAttempts && previousScore) {
+        document.getElementById('previousResult').textContent =
+          `🔁 Edellinen testi: ${previousAttempts} yritystä, pisteet: ${previousScore}`;
+      }
+    }
+
+    showPreviousResults();
+    renderGrid();
+  </script>
+  <footer>
+    <p>&copy; 2025 Ryhmä 5 – TIK25KM | Kuvat: CC0-lähteet | Ei kerää henkilötietoja</p>
+  </footer>
+</body>
+</html>
