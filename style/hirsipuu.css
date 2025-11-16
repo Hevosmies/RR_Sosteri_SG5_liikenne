@@ -31,16 +31,16 @@
   color: #fff;
 }
 
-#guessedLetters,
-#attemptsLeft,
-#scoreDisplay {
+#arvatutKirjaimet,
+#yrityksiaJaljella,
+#pisteet {
   font-weight: bold;
-  color: #00ffcc;
+  color: #00e6b8; /* hieman tummempi kontrasti */
 }
 
-input#letterInput {
-  font-size: 1.5rem;
-  width: 50px;
+input#syotakirjain {
+  font-size: 1.2rem;
+  width: 2ch; /* juuri yhden kirjaimen verran */
   text-align: center;
   border: 2px solid #fff;
   border-radius: 4px;
@@ -48,9 +48,14 @@ input#letterInput {
   color: #fff;
 }
 
-input#letterInput:hover {
+input#syotakirjain:hover {
   border-color: #00ffcc;
   background-color: rgba(255, 255, 255, 0.15);
+}
+
+input#syotakirjain:focus-visible {
+  outline: 3px solid #ffd700;
+  outline-offset: 2px;
 }
 
 button {
@@ -73,18 +78,44 @@ button:active {
   transform: scale(0.97);
 }
 
-#hint {
+button:focus-visible {
+  outline: 3px solid #ffd700;
+  outline-offset: 2px;
+}
+
+#vihje {
   font-style: italic;
-  color: #ffcc99;
+  color: #e6955c; /* kontrastiltaan parempi kuin #ffcc99 */
   margin-top: 0.5rem;
   font-size: 1.1rem;
   text-align: center;
 }
 
-#message {
+#viesti {
   font-size: 1.3rem;
   margin-top: 1rem;
-  color: #ff8080;
+  color: #e64c4c; /* kontrastiltaan parempi kuin #ff8080 */
   text-align: center;
   font-weight: bold;
+}
+
+/* Responsiivisuus pienille näytöille */
+@media (max-width: 480px) {
+  .game-container {
+    padding: 0.5rem;
+  }
+  .game-container h2 {
+    font-size: 1.4rem;
+  }
+  #wordDisplay {
+    font-size: 1.5rem;
+    letter-spacing: 0.3rem;
+  }
+  #hangmanImage {
+    width: 200px;
+  }
+  button {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
 }
