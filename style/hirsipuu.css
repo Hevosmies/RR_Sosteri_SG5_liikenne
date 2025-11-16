@@ -1,0 +1,90 @@
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.game-container h2 {
+  font-size: 1.8rem;
+  color: #ffd700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#hangmanImage {
+  width: 300px;
+  height: auto;
+  margin: 1rem 0;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  max-width: 100%;
+}
+
+#wordDisplay {
+  font-size: 2rem;
+  letter-spacing: 0.5rem;
+  margin: 1rem 0;
+  color: #fff;
+}
+
+#guessedLetters,
+#attemptsLeft,
+#scoreDisplay {
+  font-weight: bold;
+  color: #00ffcc;
+}
+
+input#letterInput {
+  font-size: 1.5rem;
+  width: 50px;
+  text-align: center;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+input#letterInput:hover {
+  border-color: #00ffcc;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+button {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 0.3rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #0077cc;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+#hint {
+  font-style: italic;
+  color: #ffcc99;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+#message {
+  font-size: 1.3rem;
+  margin-top: 1rem;
+  color: #ff8080;
+  text-align: center;
+  font-weight: bold;
+}
