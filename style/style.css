@@ -44,13 +44,19 @@ nav a {
   font-weight: bold;
   font-size: 1.1rem;
 }
-nav, nav a {
-  font-size: 1.1rem;
+
+/* Hover ja fokus näkyväksi */
+nav a:hover,
+nav a:focus-visible {
+  color: #ffd700;
+  text-decoration: underline;
+  outline: none; /* outline korvataan värimuutoksella */
 }
 
-
-nav a:hover {
-  text-decoration: underline;
+/* Näppäimistökäyttäjille selkeä fokus */
+nav a:focus-visible {
+  outline: 3px solid #ffd700;
+  outline-offset: 2px;
 }
 
 main {
@@ -66,4 +72,24 @@ footer {
   padding: 1rem;
   background-color: rgba(0, 0, 0, 0.7);
   font-size: 0.9rem;
+}
+
+/* Responsiivisuus pienille näytöille */
+@media (max-width: 480px) {
+  nav a {
+    font-size: 1rem;
+  }
+  main {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  body {
+    background-attachment: scroll; /* parempi mobiilissa */
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
 }

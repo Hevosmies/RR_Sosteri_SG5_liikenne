@@ -6,6 +6,7 @@
   <title>Liikennemerkit hallussako?</title>
   <meta name="description" content="Testaa liikennemerkkitietosi neljän pelin avulla – hauskaa ja hyödyllistä oppimista aikuisille kuljettajille." />
   <link rel="stylesheet" href="./style/style.css" />
+  <link rel="stylesheet" href="./style/liikennemerkit.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
 </head>
@@ -26,10 +27,10 @@
     </nav>
     <h1>Liikennemerkit hallussako?</h1>
   </header>
+
   <main>
-    <link rel="stylesheet" href="./style/liikennemerkit.css" />
     <section class="game-container">
-      <h2> Liikennemerkkipeli</h2>
+      <h2>Liikennemerkkipeli</h2>
       <h2>Yhdistä liikennemerkki ja selite vetämällä selite liikennemerkin päälle</h2>
       <h3>Oikeasta vastauksesta saat 2 pistettä, väärästä vastauksesta 0 pistettä</h3>
 
@@ -39,69 +40,77 @@
         <div class="selite" draggable="true" data-id="1">Etuajo-oikeuden päättyminen</div>
         <div class="selite" draggable="true" data-id="4">Taajama</div>
         <div class="selite" draggable="true" data-id="2">Tienristeys</div>
-    </div>
+      </div>
 
-        <div class="merkki-container" id="merkit">
-        <div class="merkki" etuajo-oikeuden päättyminen="1"><img src="./images/liikennemerkkipeli/merkki_3.jpg" alt="Merkki 1"></div>
-        <div class="merkki" Tienristeys="2"><img src="./images/liikennemerkkipeli/merkki_5.jpg" alt="Merkki 2"></div>
-        <div class="merkki" Vaarallisen aineen kuljettaminen kielletty="3"><img src="./images/liikennemerkkipeli/merkki_1.jpg" alt="Merkki 3"></div>
-        <div class="merkki" Taajama="4"><img src="./images/liikennemerkkipeli/merkki_4.jpg" alt="Merkki 4"></div>
-        <div class="merkki" Keskusta="5"><img src="./images/liikennemerkkipeli/merkki_2.jpg" alt="Merkki 5"></div>
+      <div class="merkki-container" id="merkit">
+        <div class="merkki" data-oikea="1"><img src="./images/liikennemerkkipeli/merkki_3.jpg" alt="Merkki 1"></div>
+        <div class="merkki" data-oikea="2"><img src="./images/liikennemerkkipeli/merkki_5.jpg" alt="Merkki 2"></div>
+        <div class="merkki" data-oikea="3"><img src="./images/liikennemerkkipeli/merkki_1.jpg" alt="Merkki 3"></div>
+        <div class="merkki" data-oikea="4"><img src="./images/liikennemerkkipeli/merkki_4.jpg" alt="Merkki 4"></div>
+        <div class="merkki" data-oikea="5"><img src="./images/liikennemerkkipeli/merkki_2.jpg" alt="Merkki 5"></div>
+      </div>
 
-        <button onclick="Tarkista()">Tarkista</button>
-        <div id="Tulokset"></div>
-            
-          <script>
-            const selitteet = document.querySelectorAll('.selite');
-            const merkit = document.querySelectorAll('.merkki');
+      <button onclick="Tarkista()">Tarkista</button>
+      <div id="Tulokset"></div>
+    </section>
 
-            selitteet.forEach(selite => {
-              selite.addEventListener('dragstart', e => {
-                e.dataTransfer.setData('text/plain', selite.dataset.id);
-                });
-                });
+    <script>
+      const selitteet = document.querySelectorAll('.selite');
+      const merkit = document.querySelectorAll('.merkki');
 
-            merkit.forEach(merkki => {
-              merkki.addEventListener('dragover', e => {
-                e.preventDefault(); 
-                merkki.classList.add('droppable');
-                });
+      selitteet.forEach(selite => {
+        selite.addEventListener('dragstart', e => {
+          e.dataTransfer.setData('text/plain', selite.dataset.id);
+        });
+      });
 
-              merkki.addEventListener('dragleave' , () => {
-                merkki.classList.remove('droppable');
-                });
+      merkit.forEach(merkki => {
+        merkki.addEventListener('dragover', e => {
+          e.preventDefault();
+          merkki.classList.add('droppable');
+        });
 
-              merkki.addEventListener('drop', e => {
-                e.preventDefault();
-                merkki.classList.remove('droppable');
-                    
-                const seliteId = e.dataTransfer.getData('text/plain');
-                const selite = document.querySelector(`.selite[data-id='${seliteId}']`);
-                  if (!merkki.querySelector('.selite')) {
-                      merkki.appendChild(selite.cloneNode(true));
-                      merkki.dataset.vastaus = seliteId;
-                      selite.draggable = false;
-                      selite.style.opacity = 0.5;
-                    }
-                });
-                });   
+        merkki.addEventListener('dragleave', () => {
+          merkki.classList.remove('droppable');
+        });
 
-        function Tarkista() {
-            let pisteet = 0;
-            merkit.forEach(merkki => {
-                if (merkki.dataset.vastaus === merkki.dataset.oikea) {
-                    pisteet += 2;
-                }
-         });
+        merkki.addEventListener('drop', e => {
+          e.preventDefault();
+          merkki.classList.remove('droppable');
+
+          const seliteId = e.dataTransfer.getData('text/plain');
+          const selite = document.querySelector(`.selite[data-id='${seliteId}']`);
+          if (!merkki.querySelector('.selite')) {
+            merkki.appendChild(selite.cloneNode(true));
+            merkki.dataset.vastaus = seliteId;
+            selite.draggable = false;
+            selite.style.opacity = 0.5;
+          }
+        });
+      });
+
+      function Tarkista() {
+        let pisteet = 0;
+        merkit.forEach(merkki => {
+          if (merkki.dataset.vastaus === merkki.dataset.oikea) {
+            pisteet += 2;
+          }
+        });
         document.getElementById('Tulokset').textContent = `Sait ${pisteet} pistettä!`;
-        }
-  //pisteiden tallennus
-      function tallennaPisteet(pisteet) {
-      const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
-      scores.hirsipuu = pisteet;
-      localStorage.setItem("gameScores", JSON.stringify(scores));
+        tallennaPisteet(pisteet); // tallennus lisätty
       }
 
-      </script>
+      // pisteiden tallennus
+      function tallennaPisteet(pisteet) {
+        const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
+        scores.liikennemerkit = pisteet;
+        localStorage.setItem("gameScores", JSON.stringify(scores));
+      }
+    </script>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ryhmä 5 – TIK25KM | Kuvat: CC0-lähteet | Ei kerää henkilötietoja</p>
+  </footer>
 </body>
 </html>
