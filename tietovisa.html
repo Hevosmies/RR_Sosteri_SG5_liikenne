@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liikennemerkit hallussako?</title>
+  <meta name="description" content="Testaa liikennemerkkitietosi neljän pelin avulla – hauskaa ja hyödyllistä oppimista aikuisille kuljettajille." />
+  <link rel="stylesheet" href="./style/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <div class="header-bar"></div>
+    <nav aria-label="Päävalikko">
+      <ul>
+        <li><a href="index.html">Etusivu</a></li>
+        <li><a href="hirsipuu.html">Hirsipuu</a></li>
+        <li><a href="kuvavalinta.html">Kuvavalinta</a></li>
+        <li><a href="liikennemerkit.html">Liikennemerkit</a></li>
+        <li><a href="tietovisa.html">Tietovisa</a></li>
+        <li><a href="koostesivu.html">Koostesivu</a></li>
+        <li><a href="infosivu.html">Infosivu</a></li>
+      </ul>
+    </nav>
+    <h1>Liikennemerkit hallussako?</h1>
+  </header>
+
+  <main class="container">
+    <section id="quiz" class="quiz">
+      <h2>Tietovisa liikenteestä!</h2>
+      <p>Valitse oikea vastaus jokaiseen kysymykseen. Pisteet lasketaan lopuksi.</p>
+      
+    </section>
+
+    <nav class="controls" aria-label="Tietovisan ohjaimet">
+      <button id="prevBtn" class="btn" disabled>Edellinen</button>
+      <button id="nextBtn" class="btn">Seuraava</button>
+      <button id="submitBtn" class="btn btn-primary">Lähetä vastaukset</button>
+      <button id="resetBtn" class="btn btn-secondary">Tyhjennä</button>
+    </nav>
+
+    <section id="progress" class="progress" aria-live="polite">
+      Kysymys <span id="currentIndex">0</span>/<span id="totalCount">0</span>
+    </section>
+
+    <section id="result" class="result" hidden>
+      <h2>Tulokset</h2>
+      <p><strong>Pisteet:</strong> <span id="score">0</span> / <span id="scoreMax">0</span></p>
+      <p><strong>Prosentti:</strong> <span id="percent">0</span>%</p>
+      <p id="summaryText" class="summary-text"></p>
+      <details class="details">
+        <summary>Näytä selitykset</summary>
+        <div id="explanations"></div>
+      </details>
+    </section>
+
+    <div id="questionContainer"></div>
+<script src="tietovisa.js" defer></script>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ryhmä 5 – TIK25KM | Kuvat: CC0-lähteet | Ei kerää henkilötietoja</p>
+  </footer>
+</body>
+</html>
