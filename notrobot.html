@@ -88,46 +88,52 @@
 
     // Tarkistaa valinnan
     function verifySelection() {
-      if (testCompleted) return;
+  if (testCompleted) return;
 
-      if (attemptCount >= 3) {
-        document.getElementById('result').textContent =
-          'Yritysten enimmäismäärä (3) saavutettu.';
-        document.getElementById('uusiksi').style.display = 'inline-block';
-        return;
-      }
+  if (attemptCount >= 3) {
+    document.getElementById('result').textContent =
+      'Yritysten enimmäismäärä (3) saavutettu.';
+    document.getElementById('uusiksi').style.display = 'inline-block';
+    return;
+  }
 
-      attemptCount++;
+  attemptCount++;
 
-      const selected = document.querySelectorAll('.grid img.selected');
-      const selectedIndexes = Array.from(selected).map(img => parseInt(img.dataset.index));
-      const correctIndexes = images
-        .map((img, i) => img.isCar ? i : null)
-        .filter(i => i !== null);
+  const selected = document.querySelectorAll('.grid img.selected');
+  const selectedIndexes = Array.from(selected).map(img => parseInt(img.dataset.index));
+  const correctIndexes = images
+    .map((img, i) => img.isCar ? i : null)
+    .filter(i => i !== null);
 
-      const isCorrect = selectedIndexes.length === correctIndexes.length &&
-                        selectedIndexes.every(i => correctIndexes.includes(i));
+  const isCorrect = selectedIndexes.length === correctIndexes.length &&
+                    selectedIndexes.every(i => correctIndexes.includes(i));
 
-      let score = 0;
-      if (attemptCount === 1) score = 3;
-      else if (attemptCount === 2) score = 2;
-      else if (attemptCount === 3) score = 1;
+  //  Laske pisteet
+  let score = 0;
+  if (attemptCount === 1) score = 3;
+  else if (attemptCount === 2) score = 2;
+  else if (attemptCount === 3) score = 1;
 
-      // Tallennetaan Local Storageen
-      localStorage.setItem('captchaAttempts', attemptCount);
-      localStorage.setItem('captchaScore', score);
+  //  Tallennetaan tulos Local Storageen
+  const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
+  scores.kuvavalinta = {
+    pisteet: score,
+    yritykset: attemptCount
+  };
+  localStorage.setItem("gameScores", JSON.stringify(scores));
 
-      if (isCorrect) {
-        testCompleted = true;
-        document.getElementById('result').textContent =
-          `Loistavaa!!! Yritys nro ${attemptCount}, pisteet: ${score}`;
-        document.getElementById('uusiksi').style.display = 'inline-block';
-      } else {
-        document.getElementById('result').textContent =
-          `Väärin. Yritys nro ${attemptCount}, pisteet: ${score}`;
-        renderGrid(); // Sekoitetaan kuvat uudelleen
-      }
-    }
+  //  Tulos
+  if (isCorrect) {
+    testCompleted = true;
+    document.getElementById('result').textContent =
+      `Loistavaa!!! Yritys nro ${attemptCount}, pisteet: ${score}`;
+    document.getElementById('uusiksi').style.display = 'inline-block';
+  } else {
+    document.getElementById('result').textContent =
+      `Väärin. Yritys nro ${attemptCount}, pisteet: ${score}`;
+    renderGrid(); // Sekoittaa kuvat
+  }
+}
 
     // Nollaa testin
     function resetTest() {

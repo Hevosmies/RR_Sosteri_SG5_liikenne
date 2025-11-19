@@ -63,7 +63,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* CAPTCHA-specific styles */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 100px);

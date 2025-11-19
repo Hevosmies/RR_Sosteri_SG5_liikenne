@@ -28,29 +28,47 @@
     <h1>Liikennemerkit hallussako?</h1>
   </header>
 
-  <main>
+  
+<main>
     <section class="summary-container">
-      <h2>Pelitulokset</h2>
+      <h2>Kooste</h2>
       <ul id="scoreList">
-        <li>Hirsipuu: <span id="scoreHirsipuu">–</span> pistettä</li>
-        <li>Kuvavalinta: <span id="scoreKuvavalinta">–</span> pistettä</li>
-        <li>Liikennemerkit: <span id="scoreLiikennemerkit">–</span> pistettä</li>
-        <li>Tietovisa: <span id="scoreTietovisa">–</span> pistettä</li>
+        <li>Hirsipuu: <span id="scoreHirsipuu">–</span></li>
+        <li>Kuvavalinta: <span id="scoreKuvavalinta">–</span></li>
+        <li>Liikennemerkit: <span id="scoreLiikennemerkit">–</span></li>
+        <li>Tietovisa: <span id="scoreTietovisa">–</span></li>
       </ul>
+      <button id="clearScores">Tyhjennä tulokset</button>
     </section>
-
-    <script>
-      const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
-
-      document.getElementById("scoreHirsipuu").textContent = scores.hirsipuu ?? "–";
-      document.getElementById("scoreKuvavalinta").textContent = scores.kuvavalinta ?? "–";
-      document.getElementById("scoreLiikennemerkit").textContent = scores.liikennemerkit ?? "–";
-      document.getElementById("scoreTietovisa").textContent = scores.tietovisa ?? "–";
-    </script>
   </main>
 
   <footer>
-    <p>&copy; 2025 Ryhmä 5 – TIK25KM | Kuvat: CC0-lähteet | Ei kerää henkilötietoja</p>
+    <p>&copy; 2025 Ryhmä 5 – TIK25KM | Ei kerää henkilötietoja</p>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
+
+      // Näytetään tulokset
+      document.getElementById("scoreHirsipuu").textContent =
+        scores.hirsipuu ? `${scores.hirsipuu.pisteet} (yrityksiä: ${scores.hirsipuu.yritykset})` : "–";
+
+      document.getElementById("scoreKuvavalinta").textContent =
+        scores.kuvavalinta ? `${scores.kuvavalinta.pisteet} (yrityksiä: ${scores.kuvavalinta.yritykset})` : "–";
+
+      document.getElementById("scoreLiikennemerkit").textContent =
+        scores.liikennemerkit ? `${scores.liikennemerkit.pisteet} (yrityksiä: ${scores.liikennemerkit.yritykset})` : "–";
+
+      document.getElementById("scoreTietovisa").textContent =
+        scores.tietovisa ? `${scores.tietovisa.pisteet} (yrityksiä: ${scores.tietovisa.yritykset})` : "–";
+
+      // Tyhjennä tulokset -nappi
+      document.getElementById("clearScores").addEventListener("click", () => {
+        localStorage.removeItem("gameScores");
+        location.reload();
+      });
+    });
+  </script>
 </body>
 </html>
