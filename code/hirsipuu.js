@@ -132,8 +132,11 @@ document.addEventListener("DOMContentLoaded", () => {
 //pisteiden tallennus
 function tallennaPisteet(pisteet) {
   const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
-  scores.hirsipuu = pisteet;
+  scores.hirsipuu = {
+    pisteet: pisteet
+  };
   localStorage.setItem("gameScores", JSON.stringify(scores));
 }
+
 // Itse pelin käynnistys kun se ladattu
 window.onload = aloitaPeli;

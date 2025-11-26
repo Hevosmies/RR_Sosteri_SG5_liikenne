@@ -1,7 +1,5 @@
 const questions = [
- 
-  {
-    question: "Milloin ajoneuvon kuljettajan on käytettävä vilkkua?",
+  { question: "Milloin ajoneuvon kuljettajan on käytettävä vilkkua?",
     options: [
       "Vain käännyttäessä risteyksessä",
       "Kaikissa suunnanmuutoksissa ja kaistanvaihdoissa",
@@ -11,8 +9,7 @@ const questions = [
     answer: 1,
     explanation: "Vilkkua on käytettävä kaikissa suunnanmuutoksissa ja kaistanvaihdoissa."
   },
-  {
-    question: "Mitä tarkoittaa, jos liikennevaloissa palaa vihreä nuoli oikealle?",
+  { question: "Mitä tarkoittaa, jos liikennevaloissa palaa vihreä nuoli oikealle?",
     options: [
       "Saa kääntyä oikealle, mutta väistettävä jalankulkijat",
       "Ajokielto oikealle",
@@ -22,8 +19,7 @@ const questions = [
     answer: 0,
     explanation: "Vihreä nuoli oikealle sallii kääntymisen, mutta jalankulkijat on väistettävä."
   },
-  {
-    question: "Milloin ajoneuvon kuljettaja saa käyttää varoitusvilkkuja?",
+  { question: "Milloin ajoneuvon kuljettaja saa käyttää varoitusvilkkuja?",
     options: [
       "Aina pysäköidessään",
       "Vain vaaratilanteessa tai poikkeuksellisessa pysähtymisessä",
@@ -33,8 +29,7 @@ const questions = [
     answer: 1,
     explanation: "Varoitusvilkkuja saa käyttää vain vaaratilanteessa tai poikkeuksellisessa pysähtymisessä."
   },
-  {
-    question: "Mitä tarkoittaa, jos ajoradalla on katkoviiva?",
+  { question: "Mitä tarkoittaa, jos ajoradalla on katkoviiva?",
     options: [
       "Kaistanvaihto on sallittu",
       "Kaistanvaihto kielletty",
@@ -44,8 +39,7 @@ const questions = [
     answer: 0,
     explanation: "Katkoviiva tarkoittaa, että kaistanvaihto on sallittu."
   },
-  {
-    question: "Milloin ajoneuvon kuljettaja saa ohittaa oikealta?",
+  { question: "Milloin ajoneuvon kuljettaja saa ohittaa oikealta?",
     options: [
       "Aina moottoritiellä",
       "Kun edellä ajava kääntyy vasemmalle",
@@ -55,8 +49,7 @@ const questions = [
     answer: 1,
     explanation: "Oikealta saa ohittaa vain, jos edellä ajava kääntyy vasemmalle ja tila oikealla riittää."
   },
-  {
-    question: "Mitä tarkoittaa, jos liikennemerkissä on sininen ympyrä ja valkoinen nuoli eteenpäin?",
+  { question: "Mitä tarkoittaa, jos liikennemerkissä on sininen ympyrä ja valkoinen nuoli eteenpäin?",
     options: [
       "Ajokielto",
       "Pakollinen ajosuunta eteenpäin",
@@ -66,8 +59,7 @@ const questions = [
     answer: 1,
     explanation: "Sininen ympyrä ja valkoinen nuoli eteenpäin tarkoittaa pakollista ajosuuntaa."
   },
-  {
-    question: "Milloin ajoneuvon kuljettaja saa käyttää kaukovaloja?",
+  { question: "Milloin ajoneuvon kuljettaja saa käyttää kaukovaloja?",
     options: [
       "Aina kun haluaa",
       "Kun tie on valaistu",
@@ -77,8 +69,7 @@ const questions = [
     answer: 2,
     explanation: "Kaukovaloja saa käyttää, jos ne eivät häikäise vastaantulijaa tai edellä ajavaa."
   },
-  {
-    question: "Mitä tarkoittaa, jos liikennevaloissa palaa keltainen valo yksinään?",
+  { question: "Mitä tarkoittaa, jos liikennevaloissa palaa keltainen valo yksinään?",
     options: [
       "Valot ovat pois käytöstä",
       "Valot vaihtuvat pian vihreäksi",
@@ -88,8 +79,7 @@ const questions = [
     answer: 3,
     explanation: "Yksinään palava keltainen valo tarkoittaa, että valo-ohjaus ei toimi normaalisti."
   },
-  {
-    question: "Milloin ajoneuvon kuljettaja saa käyttää sumuvaloja?",
+  { question: "Milloin ajoneuvon kuljettaja saa käyttää sumuvaloja?",
     options: [
       "Aina kun haluaa",
       "Vain sumussa tai sateessa",
@@ -99,8 +89,7 @@ const questions = [
     answer: 1,
     explanation: "Sumuvaloja saa käyttää vain sumussa, sateessa tai muussa näkyvyyttä heikentävässä säässä."
   },
-  {
-    question: "Mitä tarkoittaa, jos tien reunassa on jatkuva keltainen viiva?",
+  { question: "Mitä tarkoittaa, jos tien reunassa on jatkuva keltainen viiva?",
     options: [
       "Pysäköinti kielletty",
       "Ajokielto",
@@ -110,8 +99,7 @@ const questions = [
     answer: 0,
     explanation: "Jatkuva keltainen viiva tien reunassa tarkoittaa pysäköintikieltoa."
   },
-  {
-    question: "Mitä tarkoittaa, jos liikennemerkissä on punainen kolmio ja sisällä junan kuva?",
+  { question: "Mitä tarkoittaa, jos liikennemerkissä on punainen kolmio ja sisällä junan kuva?",
     options: [
       "Varoitus tasoristeyksestä",
       "Ajokielto",
@@ -121,8 +109,7 @@ const questions = [
     answer: 0,
     explanation: "Punainen kolmio junan kuvalla varoittaa tasoristeyksestä."
   },
-  {
-    question: "Mitä tarkoittaa, jos liikennemerkissä on punainen kolmio ja sisällä hirven kuva?",
+  { question: "Mitä tarkoittaa, jos liikennemerkissä on punainen kolmio ja sisällä hirven kuva?",
     options: [
       "Varoitus eläimistä tiellä",
       "Ajokielto",
@@ -132,8 +119,7 @@ const questions = [
     answer: 0,
     explanation: "Punainen kolmio hirven kuvalla varoittaa eläimistä tiellä."
   },
-  {
-    question: "Mitä tarkoittaa, jos liikennemerkissä on punainen kolmio ja sisällä liukas tie -kuva?",
+  { question: "Mitä tarkoittaa, jos liikennemerkissä on punainen kolmio ja sisällä liukas tie -kuva?",
     options: [
       "Tie voi olla liukas",
       "Ajokielto",
@@ -143,8 +129,7 @@ const questions = [
     answer: 0,
     explanation: "Punainen kolmio liukas tie -kuvalla varoittaa liukkaasta tiestä."
   },
-  {
-    question: "Mitä tarkoittaa, jos liikennemerkissä on punainen kolmio ja sisällä tietyökuva?",
+  { question: "Mitä tarkoittaa, jos liikennemerkissä on punainen kolmio ja sisällä tietyökuva?",
     options: [
       "Tietyö edessä",
       "Ajokielto",
@@ -154,8 +139,6 @@ const questions = [
     answer: 0,
     explanation: "Punainen kolmio tietyökuvalla varoittaa tietyöstä."
   }
-
-
 ];
 
 const questionContainer = document.getElementById("questionContainer");
@@ -196,6 +179,15 @@ function showQuestion(index) {
   nextBtn.disabled = index === questions.length - 1;
 }
 
+function tallennaTietovisaPisteet(score, maxQuestions) {
+  const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
+  scores.tietovisa = {
+    pisteet: score,
+    yritykset: maxQuestions
+  };
+  localStorage.setItem("gameScores", JSON.stringify(scores));
+}
+
 function saveAnswer() {
   const selected = document.querySelector(`input[name="q${currentIndex}"]:checked`);
   if (selected) userAnswers[currentIndex] = parseInt(selected.value);
@@ -215,6 +207,7 @@ function calculateResults() {
       Selitys: ${q.explanation}</p>
     `;
   });
+
   scoreSpan.textContent = score;
   scoreMaxSpan.textContent = questions.length;
   percentSpan.textContent = Math.round((score / questions.length) * 100);
@@ -222,6 +215,9 @@ function calculateResults() {
     ? "Hyvin hallussa liikennemerkit!"
     : "Kannattaa vielä harjoitella lisää.";
   resultSection.hidden = false;
+
+  // Tallennetaan viimeisin tulos koostesivulle
+  tallennaTietovisaPisteet(score, questions.length);
 }
 
 nextBtn.addEventListener("click", () => {
@@ -249,6 +245,11 @@ resetBtn.addEventListener("click", () => {
   currentIndex = 0;
   userAnswers.fill(null);
   resultSection.hidden = true;
+  explanationsDiv.innerHTML = "";
+  summaryText.textContent = "";
+  percentSpan.textContent = "0";
+  scoreSpan.textContent = "0";
+  scoreMaxSpan.textContent = questions.length;
   showQuestion(currentIndex);
 });
 

@@ -28,8 +28,7 @@
     <h1>Liikennemerkit hallussako?</h1>
   </header>
 
-  
-<main>
+  <main>
     <section class="summary-container">
       <h2>Kooste</h2>
       <ul id="scoreList">
@@ -50,18 +49,26 @@
     document.addEventListener("DOMContentLoaded", () => {
       const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
 
-      // Näytetään tulokset
+      // Näytetään tulokset varmistuksella
       document.getElementById("scoreHirsipuu").textContent =
-        scores.hirsipuu ? `${scores.hirsipuu.pisteet} (yrityksiä: ${scores.hirsipuu.yritykset})` : "–";
+        scores.hirsipuu && scores.hirsipuu.pisteet !== undefined
+          ? scores.hirsipuu.pisteet
+          : "–";
 
       document.getElementById("scoreKuvavalinta").textContent =
-        scores.kuvavalinta ? `${scores.kuvavalinta.pisteet} (yrityksiä: ${scores.kuvavalinta.yritykset})` : "–";
+        scores.kuvavalinta && scores.kuvavalinta.pisteet !== undefined
+          ? scores.kuvavalinta.pisteet
+          : "–";
 
       document.getElementById("scoreLiikennemerkit").textContent =
-        scores.liikennemerkit ? `${scores.liikennemerkit.pisteet} (yrityksiä: ${scores.liikennemerkit.yritykset})` : "–";
+        scores.liikennemerkit && scores.liikennemerkit.pisteet !== undefined
+          ? scores.liikennemerkit.pisteet
+          : "–";
 
       document.getElementById("scoreTietovisa").textContent =
-        scores.tietovisa ? `${scores.tietovisa.pisteet} (yrityksiä: ${scores.tietovisa.yritykset})` : "–";
+        scores.tietovisa && scores.tietovisa.pisteet !== undefined
+          ? scores.tietovisa.pisteet
+          : "–";
 
       // Tyhjennä tulokset -nappi
       document.getElementById("clearScores").addEventListener("click", () => {

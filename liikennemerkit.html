@@ -101,11 +101,15 @@
       }
 
       // pisteiden tallennus
-      function tallennaPisteet(pisteet) {
-        const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
-        scores.liikennemerkit = pisteet;
-        localStorage.setItem("gameScores", JSON.stringify(scores));
+     function tallennaPisteet(pisteet) {
+    const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
+    scores.liikennemerkit = {
+    pisteet: pisteet
+    };
+    localStorage.setItem("gameScores", JSON.stringify(scores));
       }
+
+      
     </script>
   </main>
 
