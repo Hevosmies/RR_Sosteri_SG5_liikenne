@@ -12,6 +12,8 @@
 </head>
 
 <body>
+
+  <!-- sivun yläosa: navigaatio ja sivun otsikko -->
   <header>
     <div class="header-bar"></div>
     <nav aria-label="Päävalikko">
@@ -28,12 +30,15 @@
     <h1>Liikennemerkit hallussako?</h1>
   </header>
 
+  
   <main>
+    <!-- Pelin ohjeet ja elementit -->
     <section class="game-container">
       <h2>Liikennemerkkipeli</h2>
       <h2>Yhdistä liikennemerkki ja selite vetämällä selite liikennemerkin päälle</h2>
       <h3>Oikeasta vastauksesta saat 2 pistettä, väärästä vastauksesta 0 pistettä</h3>
 
+      <!-- Vedettävät selitteet -->
       <div class="selite-container" id="selitteet">
         <div class="selite" draggable="true" data-id="3">Vaarallisten aineiden kuljettaminen kielletty</div>
         <div class="selite" draggable="true" data-id="5">Keskusta</div>
@@ -42,6 +47,7 @@
         <div class="selite" draggable="true" data-id="2">Tienristeys</div>
       </div>
 
+      <!-- Liikennemerkit, joihin selitteet pudotetaan -->
       <div class="merkki-container" id="merkit">
         <div class="merkki" data-oikea="1"><img src="./images/liikennemerkkipeli/merkki_3.jpg" alt="Merkki 1"></div>
         <div class="merkki" data-oikea="2"><img src="./images/liikennemerkkipeli/merkki_5.jpg" alt="Merkki 2"></div>
@@ -50,14 +56,17 @@
         <div class="merkki" data-oikea="5"><img src="./images/liikennemerkkipeli/merkki_2.jpg" alt="Merkki 5"></div>
       </div>
 
-      <button onclick="Tarkista()">Tarkista</button>
+        <!--tarkista napin toiminnot-->
+      <button id="tarkistaBtn" onclick="Tarkista()">Tarkista</button>
       <div id="Tulokset"></div>
     </section>
 
+    <!-- Elementtien valinta ja drag & drop toiminto selitelaatikoille -->
     <script>
       const selitteet = document.querySelectorAll('.selite');
       const merkit = document.querySelectorAll('.merkki');
 
+      
       selitteet.forEach(selite => {
         selite.addEventListener('dragstart', e => {
           e.dataTransfer.setData('text/plain', selite.dataset.id);
@@ -89,6 +98,7 @@
         });
       });
 
+      //pisteiden lasku
       function Tarkista() {
         let pisteet = 0;
         merkit.forEach(merkki => {
@@ -113,6 +123,7 @@
     </script>
   </main>
 
+  <!-- Sivun alatunniste -->
   <footer>
     <p>&copy; 2025 Ryhmä 5 – TIK25KM | Kuvat: CC0-lähteet | Ei kerää henkilötietoja</p>
   </footer>

@@ -1,7 +1,9 @@
+/* perusasetukset*/
 body { 
     font-family: sans-serif; padding: 20px; 
 } 
 
+/* selitteet + drag&drop*/
 .selite-container { 
     display: flex; 
     flex-wrap: wrap; 
@@ -18,7 +20,7 @@ body {
     cursor: grab; 
     font-size: 14px; 
 } 
-
+ /* liikennemerkit*/
 .merkki-container { 
     display: flex; 
     justify-content: center; 
@@ -46,15 +48,40 @@ body {
     max-height: 90px; 
 }
 
-
+/* drag&drop tilat */
 .droppable { 
     border: 2px solid #007bff; 
     background-color: #e9f5ff; 
 }
-    
+
+/* Tarkista napin tyyli */
+#tarkistaBtn {
+  font-size: 18px;          
+  padding: 12px 24px;       
+  background-color: #2faaf2; 
+  color: #fff;              
+  border: none;             
+  border-radius: 6px;            
+}
+
+
+  /* tulokset*/  
 #Tulokset {
     margin-top: 10px;
     font-weight: bold;
     font-size: 18px;
     color: #0e27e9;
 }
+
+/* Responsiivisuus */
+@media (max-width: 640px) {
+    .controls {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .question-title {
+      font-size: 1rem;
+    }
+  }
+  .option label {
+    cursor: pointer;
+  }
