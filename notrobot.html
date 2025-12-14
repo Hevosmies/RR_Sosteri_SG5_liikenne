@@ -11,6 +11,8 @@
 </head>
 
 <body>
+
+  <!-- Ylävalikko -->
   <header>
     <div class="header-bar"></div>
     <nav aria-label="Päävalikko">
@@ -26,22 +28,28 @@
     </nav>
     <h1>Liikennemerkit hallussako?</h1>
   </header>
-  <h2 style="text-align:center;">Kuvavalinta</h2>
-  <p id="hint" style="text-align:center;">Valitse kaikki kuvat, joissa on auto</p>
-<div class="grid" id="Kuvaruutu"></div>
-  
-  <div class="grid" id="Kuvaruutu"></div>
 
-  <!-- Napit -->
-  <button onclick="verifySelection()">Tarkista</button>
-  
-  <div style="text-align:center;">
-  <button id="uusiksi" onclick="resetTest()" style="display:none;">Yritä uudelleen</button></div>
+  <!-- Pääsisältö läpikuultavalla taustalla -->
+  <main>
+    <h2 style="text-align:center;">Kuvavalinta</h2>
+    <p id="hint" style="text-align:center;">Valitse kaikki kuvat, joissa on auto</p>
 
-  <!-- Tulokset -->
-  <p id="result"></p>
-  <p id="previousResult" style="font-style:italic; text-align:center;"></p>
+    <!-- Kuvaruudukko -->
+    <div class="grid" id="Kuvaruutu"></div>
 
+    <!-- Napit -->
+    <button onclick="verifySelection()">Tarkista</button>
+
+    <div style="text-align:center;">
+      <button id="uusiksi" onclick="resetTest()" style="display:none;">Yritä uudelleen</button>
+    </div>
+
+    <!-- Tulokset -->
+    <p id="result"></p>
+    <p id="previousResult" style="font-style:italic; text-align:center;"></p>
+  </main>
+
+  <!-- Pelin logiikka -->
   <script>
     const images = [
       { src: 'images/notrobot/car1.jpg', isCar: true },
@@ -59,7 +67,6 @@
     let attemptCount = 0;
     let testCompleted = false;
 
-    // Sekoittaa kuvat satunnaiseen järjestykseen
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -67,7 +74,6 @@
       }
     }
 
-    // Piirtää ruudukon
     function renderGrid() {
       grid.innerHTML = '';
       shuffle(images);
@@ -76,7 +82,6 @@
         const imageElement = document.createElement('img');
         imageElement.src = img.src;
         imageElement.dataset.index = index;
-        imageElement.classList.remove('selected');
         imageElement.onclick = () => {
           if (!testCompleted) {
             imageElement.classList.toggle('selected');
@@ -88,56 +93,52 @@
       document.getElementById('result').textContent = '';
     }
 
-    // Tarkistaa valinnan
     function verifySelection() {
-  if (testCompleted) return;
+      if (testCompleted) return;
 
-  if (attemptCount >= 3) {
-    document.getElementById('result').textContent =
-      'Yritysten enimmäismäärä (3) saavutettu.';
-    document.getElementById('uusiksi').style.display = 'inline-block';
-    return;
-  }
+      if (attemptCount >= 3) {
+        document.getElementById('result').textContent =
+          'Yritysten enimmäismäärä (3) saavutettu.';
+        document.getElementById('uusiksi').style.display = 'inline-block';
+        return;
+      }
 
-  attemptCount++;
+      attemptCount++;
 
-  const selected = document.querySelectorAll('.grid img.selected');
-  const selectedIndexes = Array.from(selected).map(img => parseInt(img.dataset.index));
-  const correctIndexes = images
-    .map((img, i) => img.isCar ? i : null)
-    .filter(i => i !== null);
+      const selected = document.querySelectorAll('.grid img.selected');
+      const selectedIndexes = Array.from(selected).map(img => parseInt(img.dataset.index));
+      const correctIndexes = images
+        .map((img, i) => img.isCar ? i : null)
+        .filter(i => i !== null);
 
-  const isCorrect = selectedIndexes.length === correctIndexes.length &&
-                    selectedIndexes.every(i => correctIndexes.includes(i));
+      const isCorrect =
+        selectedIndexes.length === correctIndexes.length &&
+        selectedIndexes.every(i => correctIndexes.includes(i));
 
-  //  Laske pisteet
-  let score = 0;
-  if (attemptCount === 1) score = 3;
-  else if (attemptCount === 2) score = 2;
-  else if (attemptCount === 3) score = 1;
+      let score = 0;
+      if (attemptCount === 1) score = 3;
+      else if (attemptCount === 2) score = 2;
+      else if (attemptCount === 3) score = 1;
 
-  //  Tallennetaan tulos Local Storageen
-  const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
-  scores.kuvavalinta = {
-    pisteet: score,
-    yritykset: attemptCount
-  };
-  localStorage.setItem("gameScores", JSON.stringify(scores));
+      const scores = JSON.parse(localStorage.getItem("gameScores")) || {};
+      scores.kuvavalinta = {
+        pisteet: score,
+        yritykset: attemptCount
+      };
+      localStorage.setItem("gameScores", JSON.stringify(scores));
 
-  //  Tulos
-  if (isCorrect) {
-    testCompleted = true;
-    document.getElementById('result').textContent =
-      `Loistavaa!!! Yritys nro ${attemptCount}, pisteet: ${score}`;
-    document.getElementById('uusiksi').style.display = 'inline-block';
-  } else {
-    document.getElementById('result').textContent =
-      `Väärin. Yritys nro ${attemptCount}, pisteet: ${score}`;
-    renderGrid(); // Sekoittaa kuvat
-  }
-}
+      if (isCorrect) {
+        testCompleted = true;
+        document.getElementById('result').textContent =
+          `Loistavaa!!! Yritys nro ${attemptCount}, pisteet: ${score}`;
+        document.getElementById('uusiksi').style.display = 'inline-block';
+      } else {
+        document.getElementById('result').textContent =
+          `Väärin. Yritys nro ${attemptCount}, pisteet: ${score}`;
+        renderGrid();
+      }
+    }
 
-    // Nollaa testin
     function resetTest() {
       attemptCount = 0;
       testCompleted = false;
@@ -146,7 +147,6 @@
       renderGrid();
     }
 
-    // Näyttää edellisen tuloksen
     function showPreviousResults() {
       const previousAttempts = localStorage.getItem('captchaAttempts');
       const previousScore = localStorage.getItem('captchaScore');
@@ -160,8 +160,11 @@
     showPreviousResults();
     renderGrid();
   </script>
+
+  <!-- Alatunniste -->
   <footer>
     <p>&copy; 2025 Ryhmä 5 – TIK25KM | Kuvat: CC0-lähteet | Ei kerää henkilötietoja</p>
   </footer>
+
 </body>
 </html>
